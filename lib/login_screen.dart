@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'create_account_screen.dart';
+import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -184,7 +185,13 @@ class _LoginScreenState extends State<LoginScreen> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const ForgotPasswordScreen(),
+                    ),
+                  );
                 },
                 child: const Text(
                   'Forgot password?',
@@ -205,7 +212,13 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 56,
               child: ElevatedButton(
                 onPressed: () {
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const ForgotPasswordScreen(),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF2F80FF),
