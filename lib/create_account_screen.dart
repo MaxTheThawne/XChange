@@ -54,6 +54,102 @@ class _CreateAccountScreenState
     Navigator.pop(context);
   }
 
+  void showTerms() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF111318),
+          title: const Text(
+            'Terms and Conditions',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'monospace',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: const SingleChildScrollView(
+            child: Text(
+              '1. Users must provide correct account information.\n\n'
+                  '2. Users must not list illegal or harmful products.\n\n'
+                  '3. Buyers and sellers are responsible for checking '
+                  'product information before completing a transaction.\n\n'
+                  '4. Users must protect their passwords and account details.\n\n'
+                  '5. XChange may restrict accounts that violate these terms.',
+              style: TextStyle(
+                color: Color(0xFF8193B2),
+                fontFamily: 'monospace',
+                height: 1.5,
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                'Close',
+                style: TextStyle(
+                  color: Color(0xFF2F80FF),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showPrivacyPolicy() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF111318),
+          title: const Text(
+            'Privacy Policy',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'monospace',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: const SingleChildScrollView(
+            child: Text(
+              '1. XChange may collect your name, email address, '
+                  'phone number and account information.\n\n'
+                  '2. Your information will be used to manage your account '
+                  'and provide application services.\n\n'
+                  '3. Your information will not be sold to other companies.\n\n'
+                  '4. Passwords will be securely managed using Firebase '
+                  'Authentication.\n\n'
+                  '5. Users should not share passwords or sensitive '
+                  'information with others.',
+              style: TextStyle(
+                color: Color(0xFF8193B2),
+                fontFamily: 'monospace',
+                height: 1.5,
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                'Close',
+                style: TextStyle(
+                  color: Color(0xFF2F80FF),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -279,8 +375,8 @@ class _CreateAccountScreenState
             const SizedBox(height: 16),
 
             // Terms and privacy checkbox
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 Checkbox(
                   value: agreedToTerms,
@@ -296,37 +392,52 @@ class _CreateAccountScreenState
                   },
                 ),
 
-                const Expanded(
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'I agree to the ',
-                          style: TextStyle(
-                            color: Color(0xFF8193B2),
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Terms',
-                          style: TextStyle(
-                            color: Color(0xFF2F80FF),
-                          ),
-                        ),
-                        TextSpan(
-                          text: ' and ',
-                          style: TextStyle(
-                            color: Color(0xFF8193B2),
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Privacy Policy',
-                          style: TextStyle(
-                            color: Color(0xFF2F80FF),
-                          ),
-                        ),
-                      ],
-                    ),
+                const Text(
+                  'I agree to the ',
+                  style: TextStyle(
+                    color: Color(0xFF8193B2),
+                    fontFamily: 'monospace',
+                    fontSize: 12,
+                  ),
+                ),
+
+                TextButton(
+                  onPressed: showTerms,
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  child: const Text(
+                    'Terms',
                     style: TextStyle(
+                      color: Color(0xFF2F80FF),
+                      fontFamily: 'monospace',
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+
+                const Text(
+                  ' and ',
+                  style: TextStyle(
+                    color: Color(0xFF8193B2),
+                    fontFamily: 'monospace',
+                    fontSize: 12,
+                  ),
+                ),
+
+                TextButton(
+                  onPressed: showPrivacyPolicy,
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  child: const Text(
+                    'Privacy Policy',
+                    style: TextStyle(
+                      color: Color(0xFF2F80FF),
                       fontFamily: 'monospace',
                       fontSize: 12,
                     ),
@@ -334,7 +445,6 @@ class _CreateAccountScreenState
                 ),
               ],
             ),
-
             const SizedBox(height: 16),
 
             // Create-account button

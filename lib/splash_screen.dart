@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
 
     screenTimer = Timer(
-      const Duration(seconds: 3),
+      const Duration(seconds: 5),
           () {
         if (mounted) {
           Navigator.pushReplacement(
@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
     bool isActive = activeDot == index;
 
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 250),
+      duration: const Duration(milliseconds: 400),
       width: isActive ? 11 : 8,
       height: isActive ? 11 : 8,
       margin: const EdgeInsets.symmetric(horizontal: 6),
