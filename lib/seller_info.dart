@@ -1,58 +1,58 @@
 import 'package:flutter/material.dart';
 import 'rate_seller.dart';
+import 'item_page_screen.dart';
 
 class SellerScreen extends StatelessWidget {
-  const SellerScreen({super.key});
+  final String sellerName;
+  final String sellerEmail;
 
-  // TEMPORARY SELLER DATA
+  const SellerScreen({
+    super.key,
+    required this.sellerName,
+    required this.sellerEmail,
+  });
 
-  final String sellerName = "Cavan N.";
-  final String sellerEmail = "cavan@example.com";
   final double sellerRating = 4.9;
   final int itemsSold = 36;
   final String memberSince = "June 2026";
 
   @override
   Widget build(BuildContext context) {
-    // TEMPORARY PRODUCT LIST
 
     final List<Product> products = [
       Product(
         name: "Final Fantasy X PS2 NTSC-U",
-        price: "\$19.50",
-        image: null,
+        price: 19.50,
       ),
+
       Product(
         name: "Nintendo GameCube Controller",
-        price: "\$34.00",
-        image: null,
+        price: 34.00,
       ),
+
       Product(
         name: "PlayStation 2 Console",
-        price: "\$65.00",
-        image: null,
+        price: 65.00,
       ),
+
       Product(
         name: "Kingdom Hearts PS2",
-        price: "\$22.50",
-        image: null,
+        price: 22.50,
       ),
+
       Product(
         name: "Game Boy Advance",
-        price: "\$58.00",
-        image: null,
+        price: 58.00,
       ),
+
       Product(
         name: "Nintendo DS Lite",
-        price: "\$45.00",
-        image: null,
+        price: 45.00,
       ),
     ];
 
     return Scaffold(
       backgroundColor: const Color(0xFF080A0F),
-
-      // APP BAR
 
       appBar: AppBar(
         backgroundColor: const Color(0xFF080A0F),
@@ -64,6 +64,7 @@ class SellerScreen extends StatelessWidget {
             color: Color(0xFF2D7CFF),
             size: 20,
           ),
+
           onPressed: () {
             Navigator.pop(context);
           },
@@ -80,25 +81,31 @@ class SellerScreen extends StatelessWidget {
         ),
       ),
 
-      // SCROLLABLE SCREEN
-
       body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 30),
+        padding: const EdgeInsets.fromLTRB(
+          16,
+          8,
+          16,
+          30,
+        ),
 
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment:
+          CrossAxisAlignment.start,
+
           children: [
 
-            // SELLER INFORMATION CARD
+            // Seller information
 
             Container(
               width: double.infinity,
+
               padding: const EdgeInsets.all(18),
 
               decoration: BoxDecoration(
                 color: const Color(0xFF101522),
-
-                borderRadius: BorderRadius.circular(18),
+                borderRadius:
+                BorderRadius.circular(18),
 
                 border: Border.all(
                   color: const Color(0xFF202A3D),
@@ -106,10 +113,10 @@ class SellerScreen extends StatelessWidget {
               ),
 
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                crossAxisAlignment:
+                CrossAxisAlignment.start,
 
-                  // PROFILE PICTURE + NAME
+                children: [
 
                   Row(
                     children: [
@@ -120,16 +127,19 @@ class SellerScreen extends StatelessWidget {
 
                         decoration: BoxDecoration(
                           color: const Color(0xFF1261E8),
-                          borderRadius: BorderRadius.circular(18),
+                          borderRadius:
+                          BorderRadius.circular(18),
                         ),
 
                         child: Center(
                           child: Text(
                             sellerName[0],
+
                             style: const TextStyle(
                               fontFamily: "monospace",
                               fontSize: 34,
-                              fontWeight: FontWeight.bold,
+                              fontWeight:
+                              FontWeight.bold,
                               color: Colors.white,
                             ),
                           ),
@@ -141,10 +151,12 @@ class SellerScreen extends StatelessWidget {
                       Expanded(
                         child: Text(
                           sellerName,
+
                           style: const TextStyle(
                             fontFamily: "monospace",
                             fontSize: 21,
-                            fontWeight: FontWeight.bold,
+                            fontWeight:
+                            FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
@@ -154,8 +166,6 @@ class SellerScreen extends StatelessWidget {
 
                   const SizedBox(height: 22),
 
-                  // EMAIL
-
                   _infoRow(
                     icon: Icons.email_outlined,
                     label: "EMAIL",
@@ -164,72 +174,77 @@ class SellerScreen extends StatelessWidget {
 
                   const SizedBox(height: 15),
 
-                  // sELLER RATING
-
                   _infoRow(
                     icon: Icons.star_outline,
                     label: "AVERAGE SELLER RATING",
-                    value: "${sellerRating.toStringAsFixed(1)} / 5",
+                    value:
+                    "${sellerRating.toStringAsFixed(1)} / 5",
                   ),
 
                   const SizedBox(height: 15),
 
-                  // ITEMS SOLD
-
                   _infoRow(
-                    icon: Icons.shopping_bag_outlined,
+                    icon:
+                    Icons.shopping_bag_outlined,
                     label: "ITEMS SOLD",
                     value: itemsSold.toString(),
                   ),
 
                   const SizedBox(height: 15),
 
-                  // MEMBER SINCE
-
                   _infoRow(
-                    icon: Icons.calendar_today_outlined,
+                    icon:
+                    Icons.calendar_today_outlined,
                     label: "MEMBER SINCE",
                     value: memberSince,
                   ),
 
                   const SizedBox(height: 22),
 
-                  // RATE SELLER BUTTON
-
                   SizedBox(
                     width: double.infinity,
                     height: 48,
 
                     child: OutlinedButton(
-                      onPressed: () {Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RateSellerScreen(
-                            sellerName: sellerName,
+                      onPressed: () {
+
+                        Navigator.push(
+                          context,
+
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return RateSellerScreen(
+                                sellerName: sellerName,
+                              );
+                            },
                           ),
-                        ),
-                      );
+                        );
                       },
 
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: const Color(0xFF2D7CFF),
+                        foregroundColor:
+                        const Color(0xFF2D7CFF),
 
                         side: const BorderSide(
                           color: Color(0xFF2D7CFF),
                           width: 1.2,
                         ),
 
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                        shape:
+                        RoundedRectangleBorder(
+                          borderRadius:
+                          BorderRadius.circular(12),
                         ),
                       ),
 
                       child: const Text(
                         "RATE SELLER",
+
                         style: TextStyle(
                           fontFamily: "monospace",
                           fontSize: 13,
-                          fontWeight: FontWeight.bold,
+                          fontWeight:
+                          FontWeight.bold,
                           letterSpacing: 1,
                         ),
                       ),
@@ -241,7 +256,7 @@ class SellerScreen extends StatelessWidget {
 
             const SizedBox(height: 28),
 
-            // ALL PRODUCTS
+            // All products
 
             Row(
               children: [
@@ -252,7 +267,8 @@ class SellerScreen extends StatelessWidget {
 
                   decoration: BoxDecoration(
                     color: const Color(0xFF2D7CFF),
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius:
+                    BorderRadius.circular(5),
                   ),
                 ),
 
@@ -276,12 +292,11 @@ class SellerScreen extends StatelessWidget {
 
             const SizedBox(height: 14),
 
-            // PRODUCT GRID
-
             GridView.builder(
               shrinkWrap: true,
 
-              physics: const NeverScrollableScrollPhysics(),
+              physics:
+              const NeverScrollableScrollPhysics(),
 
               itemCount: products.length,
 
@@ -294,6 +309,7 @@ class SellerScreen extends StatelessWidget {
               ),
 
               itemBuilder: (context, index) {
+
                 final product = products[index];
 
                 return _productCard(
@@ -308,15 +324,14 @@ class SellerScreen extends StatelessWidget {
     );
   }
 
-  // INFORMATION ROW
-
   Widget _infoRow({
     required IconData icon,
     required String label,
     required String value,
   }) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment:
+      CrossAxisAlignment.start,
 
       children: [
 
@@ -330,7 +345,8 @@ class SellerScreen extends StatelessWidget {
 
         Expanded(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment:
+            CrossAxisAlignment.start,
 
             children: [
 
@@ -364,8 +380,6 @@ class SellerScreen extends StatelessWidget {
     );
   }
 
-  // PRODUCT CARD
-
   Widget _productCard(
       BuildContext context,
       Product product,
@@ -374,18 +388,35 @@ class SellerScreen extends StatelessWidget {
       color: Colors.transparent,
 
       child: InkWell(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius:
+        BorderRadius.circular(16),
 
         onTap: () {
-          // Product button is implemented.
-          // We'll connect this to your actual Item Page later.
 
           Navigator.push(
             context,
+
             MaterialPageRoute(
-              builder: (context) => ProductDetailsPage(
-                product: product,
-              ),
+              builder: (context) {
+
+                return ItemPageScreen(
+                  productName: product.name,
+
+                  sellerName: sellerName,
+                  sellerEmail: sellerEmail,
+
+                  originalPrice: product.price,
+                  discountPercentage: 10.0,
+                  shippingCharge: 5.0,
+
+                  remainingStock: 5,
+
+                  description:
+                  "This is a temporary product description. "
+                      "The actual product information will be "
+                      "added later.",
+                );
+              },
             ),
           );
         },
@@ -395,8 +426,8 @@ class SellerScreen extends StatelessWidget {
 
           decoration: BoxDecoration(
             color: const Color(0xFF101522),
-
-            borderRadius: BorderRadius.circular(16),
+            borderRadius:
+            BorderRadius.circular(16),
 
             border: Border.all(
               color: const Color(0xFF202A3D),
@@ -404,11 +435,10 @@ class SellerScreen extends StatelessWidget {
           ),
 
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment:
+            CrossAxisAlignment.start,
 
             children: [
-
-              // PRODUCT IMAGE
 
               Expanded(
                 child: Container(
@@ -416,20 +446,11 @@ class SellerScreen extends StatelessWidget {
 
                   decoration: BoxDecoration(
                     color: const Color(0xFF161D2B),
-
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius:
+                    BorderRadius.circular(12),
                   ),
 
-                  child: product.image != null
-                      ? ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-
-                    child: Image.network(
-                      product.image!,
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                      : const Center(
+                  child: const Center(
                     child: Icon(
                       Icons.image_outlined,
                       color: Color(0xFF2D7CFF),
@@ -441,13 +462,12 @@ class SellerScreen extends StatelessWidget {
 
               const SizedBox(height: 10),
 
-              // PRODUCT NaME
-
               Text(
                 product.name,
 
                 maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                overflow:
+                TextOverflow.ellipsis,
 
                 style: const TextStyle(
                   fontFamily: "monospace",
@@ -459,10 +479,8 @@ class SellerScreen extends StatelessWidget {
 
               const SizedBox(height: 6),
 
-              // PRODUCT PRICE
-
               Text(
-                product.price,
+                "\$${product.price.toStringAsFixed(2)}",
 
                 style: const TextStyle(
                   fontFamily: "monospace",
@@ -479,61 +497,12 @@ class SellerScreen extends StatelessWidget {
   }
 }
 
-// PRODUCT MODEL
-
 class Product {
   final String name;
-  final String price;
-  final String? image;
+  final double price;
 
   Product({
     required this.name,
     required this.price,
-    this.image,
   });
-}
-
-
-// TEMPORARY PRODUCT DETAILS PAGE
-
-class ProductDetailsPage extends StatelessWidget {
-  final Product product;
-
-  const ProductDetailsPage({
-    super.key,
-    required this.product,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF080A0F),
-
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF080A0F),
-
-        title: const Text(
-          "Item Page",
-          style: TextStyle(
-            fontFamily: "monospace",
-            color: Colors.white,
-          ),
-        ),
-      ),
-
-      body: Center(
-        child: Text(
-          product.name,
-
-          textAlign: TextAlign.center,
-
-          style: const TextStyle(
-            fontFamily: "monospace",
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
 }
