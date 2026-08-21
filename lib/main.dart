@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'seller_info.dart';
+import 'home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       title: 'XChange',
 
       theme: ThemeData(
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'monospace',
       ),
 
-      home: const SellerScreen(),
+      home: const HomeScreen(),
     );
   }
 }
