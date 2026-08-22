@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'item_page_screen.dart';
-
+import 'search_result_assumed_keyword.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -94,7 +94,12 @@ class HomeScreen extends StatelessWidget {
 
         title: GestureDetector(
           onTap: () {
-            // Search will be implemented later.
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SearchScreen(),
+              ),
+            );
           },
 
           child: Container(
