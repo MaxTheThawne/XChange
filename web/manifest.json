@@ -1,6 +1,6 @@
 {
-    "name": "backup1",
-    "short_name": "backup1",
+    "name": "xchange",
+    "short_name": "xchange",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
