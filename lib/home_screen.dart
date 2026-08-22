@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'sell.item.dart';
 import 'item_page_screen.dart';
 import 'search_result_assumed_keyword.dart';
 class HomeScreen extends StatelessWidget {
@@ -207,6 +208,26 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+
+      // Bottom Left Sell Button
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SellFlowWizard(),
+            ),
+          );
+        },
+        backgroundColor: Colors.grey,
+        elevation: 4,
+        child: const Icon(
+          Icons.add,
+          color: Colors.black,
+          size: 28,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 
