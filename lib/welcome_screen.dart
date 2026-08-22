@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'create_account_screen.dart';
+import 'home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -213,7 +214,12 @@ class WelcomeScreen extends StatelessWidget {
               // Continue-as-guest button
               TextButton.icon(
                 onPressed: () {
-                  // Home screen navigation will be added later.
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomeScreen(),
+                    ),
+                  );
                 },
                 label: const Text(
                   'Continue as guest',
