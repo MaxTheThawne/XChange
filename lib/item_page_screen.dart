@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'seller_info.dart';
 import 'buy_now_screen.dart';
+import 'add_to_cart.dart';
 
-class ItemPageScreen extends StatelessWidget {
+class ItemPageScreen extends StatefulWidget {
   final String productName;
   final String sellerName;
   final String sellerEmail;
@@ -27,12 +28,20 @@ class ItemPageScreen extends StatelessWidget {
   });
 
   @override
+  State<ItemPageScreen> createState() => _ItemPageScreenState();
+}
+
+class _ItemPageScreenState extends State<ItemPageScreen> {
+  // Keeps track of which image is currently selected.
+  int selectedImageIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
     double discountAmount =
-        originalPrice * discountPercentage / 100;
+        widget.originalPrice * widget.discountPercentage / 100;
 
     double totalPrice =
-        originalPrice - discountAmount + shippingCharge;
+        widget.originalPrice - discountAmount + widget.shippingCharge;
 
     return Scaffold(
       backgroundColor: const Color(0xFF080A0F),
@@ -67,7 +76,7 @@ class ItemPageScreen extends StatelessWidget {
         child: Column(
           children: [
 
-            // Main product image
+            // MAIN PRODUCT IMAGE
 
             Container(
               height: 300,
@@ -85,13 +94,32 @@ class ItemPageScreen extends StatelessWidget {
               child: Stack(
                 children: [
 
-                  const Center(
-                    child: Icon(
-                      Icons.image_outlined,
-                      size: 100,
-                      color: Color(0xFF2D7CFF),
+                  // Main image placeholder
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+
+                        const Icon(
+                          Icons.image_outlined,
+                          size: 100,
+                          color: Color(0xFF2D7CFF),
+                        ),
+
+                        const SizedBox(height: 10),
+
+                        Text(
+                          "Image ${selectedImageIndex + 1}",
+                          style: const TextStyle(
+                            fontFamily: "monospace",
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+
+                  // Image counter
 
                   Positioned(
                     left: 15,
@@ -108,9 +136,9 @@ class ItemPageScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
 
-                      child: const Text(
-                        "2 / 4",
-                        style: TextStyle(
+                      child: Text(
+                        "${selectedImageIndex + 1} / 4",
+                        style: const TextStyle(
                           fontFamily: "monospace",
                           fontSize: 12,
                           color: Colors.white,
@@ -119,12 +147,15 @@ class ItemPageScreen extends StatelessWidget {
                     ),
                   ),
 
+                  // Favorite button
+
                   Positioned(
                     right: 15,
                     bottom: 12,
 
                     child: IconButton(
                       onPressed: () {},
+
                       icon: const Icon(
                         Icons.favorite_border,
                         color: Color(0xFF2D7CFF),
@@ -136,7 +167,7 @@ class ItemPageScreen extends StatelessWidget {
               ),
             ),
 
-            // Product name
+            // PRODUCT NAME
 
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -145,7 +176,7 @@ class ItemPageScreen extends StatelessWidget {
               ),
 
               child: Text(
-                productName,
+                widget.productName,
                 textAlign: TextAlign.center,
 
                 style: const TextStyle(
@@ -157,29 +188,30 @@ class ItemPageScreen extends StatelessWidget {
               ),
             ),
 
-            // Product images
+            // PRODUCT IMAGE THUMBNAILS
 
             SizedBox(
               height: 100,
 
               child: ListView(
                 scrollDirection: Axis.horizontal,
+
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                 ),
 
                 children: [
-                  _productThumbnail("Image 1"),
-                  _productThumbnail("Image 2"),
-                  _productThumbnail("Image 3"),
-                  _productThumbnail("Image 4"),
+                  _productThumbnail("Image 1", 0),
+                  _productThumbnail("Image 2", 1),
+                  _productThumbnail("Image 3", 2),
+                  _productThumbnail("Image 4", 3),
                 ],
               ),
             ),
 
             const SizedBox(height: 15),
 
-            // Seller information
+            // SELLER INFORMATION
 
             Container(
               margin: const EdgeInsets.symmetric(
@@ -191,6 +223,7 @@ class ItemPageScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color(0xFF10141D),
                 borderRadius: BorderRadius.circular(14),
+
                 border: Border.all(
                   color: const Color(0xFF202735),
                 ),
@@ -206,6 +239,7 @@ class ItemPageScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: const Color(0xFF17233A),
+
                       border: Border.all(
                         color: const Color(0xFF2D7CFF),
                       ),
@@ -238,7 +272,8 @@ class ItemPageScreen extends StatelessWidget {
                         const SizedBox(height: 4),
 
                         Text(
-                          sellerName,
+                          widget.sellerName,
+
                           style: const TextStyle(
                             fontFamily: "monospace",
                             fontSize: 14,
@@ -252,15 +287,14 @@ class ItemPageScreen extends StatelessWidget {
 
                   OutlinedButton(
                     onPressed: () {
-
                       Navigator.push(
                         context,
 
                         MaterialPageRoute(
                           builder: (context) {
                             return SellerScreen(
-                              sellerName: sellerName,
-                              sellerEmail: sellerEmail,
+                              sellerName: widget.sellerName,
+                              sellerEmail: widget.sellerEmail,
                             );
                           },
                         ),
@@ -283,6 +317,7 @@ class ItemPageScreen extends StatelessWidget {
 
                     child: const Text(
                       "Visit Seller",
+
                       style: TextStyle(
                         fontFamily: "monospace",
                         fontSize: 11,
@@ -295,24 +330,18 @@ class ItemPageScreen extends StatelessWidget {
 
             const SizedBox(height: 15),
 
-            // Price breakdown
+            // PRICE BREAKDOWN
 
             _priceBreakdown(
-              originalPrice,
+              widget.originalPrice,
               discountAmount,
-              shippingCharge,
+              widget.shippingCharge,
               totalPrice,
             ),
 
-            const SizedBox(height: 15),
-
-            // Buy buttons
-
-            _buyButtons(context, totalPrice),
-
             const SizedBox(height: 30),
 
-            // Remaining stock and description
+            // REMAINING STOCK AND DESCRIPTION
 
             Container(
               margin: const EdgeInsets.symmetric(
@@ -324,6 +353,7 @@ class ItemPageScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color(0xFF10141D),
                 borderRadius: BorderRadius.circular(16),
+
                 border: Border.all(
                   color: const Color(0xFF202735),
                 ),
@@ -350,7 +380,8 @@ class ItemPageScreen extends StatelessWidget {
                     ),
 
                     child: Text(
-                      "Remaining stock: $remainingStock",
+                      "Remaining stock: ${widget.remainingStock}",
+
                       textAlign: TextAlign.center,
 
                       style: const TextStyle(
@@ -370,6 +401,7 @@ class ItemPageScreen extends StatelessWidget {
 
                     decoration: BoxDecoration(
                       color: const Color(0xFF080A0F),
+
                       borderRadius:
                       BorderRadius.circular(16),
 
@@ -386,6 +418,7 @@ class ItemPageScreen extends StatelessWidget {
 
                         const Text(
                           "DESCRIPTION",
+
                           style: TextStyle(
                             fontFamily: "monospace",
                             fontSize: 13,
@@ -397,7 +430,7 @@ class ItemPageScreen extends StatelessWidget {
                         const SizedBox(height: 15),
 
                         Text(
-                          description,
+                          widget.description,
 
                           style: const TextStyle(
                             fontFamily: "monospace",
@@ -412,6 +445,13 @@ class ItemPageScreen extends StatelessWidget {
                 ],
               ),
             ),
+
+            const SizedBox(height: 20),
+
+            // BUY NOW AND ADD TO CART BUTTONS
+
+            _buyButtons(context, totalPrice),
+
             const SizedBox(height: 30),
           ],
         ),
@@ -419,46 +459,81 @@ class ItemPageScreen extends StatelessWidget {
     );
   }
 
-  Widget _productThumbnail(String name) {
-    return Container(
-      width: 85,
+  // PRODUCT THUMBNAIL
 
-      margin: const EdgeInsets.only(right: 12),
+  Widget _productThumbnail(
+      String name,
+      int imageIndex,
+      ) {
+    bool isSelected =
+        selectedImageIndex == imageIndex;
 
-      decoration: BoxDecoration(
-        color: const Color(0xFF10141D),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFF202735),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedImageIndex = imageIndex;
+        });
+      },
+
+      child: Container(
+        width: 85,
+
+        margin: const EdgeInsets.only(
+          right: 12,
         ),
-      ),
 
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        decoration: BoxDecoration(
+          color: const Color(0xFF10141D),
 
-        children: [
+          borderRadius:
+          BorderRadius.circular(12),
 
-          const Icon(
-            Icons.image_outlined,
-            color: Color(0xFF2D7CFF),
-            size: 35,
+          border: Border.all(
+            color: isSelected
+                ? const Color(0xFF2D7CFF)
+                : const Color(0xFF202735),
+
+            width: isSelected ? 2 : 1,
           ),
+        ),
 
-          const SizedBox(height: 5),
+        child: Column(
+          mainAxisAlignment:
+          MainAxisAlignment.center,
 
-          Text(
-            name,
+          children: [
 
-            style: const TextStyle(
-              fontFamily: "monospace",
-              fontSize: 9,
-              color: Colors.white,
+            Icon(
+              Icons.image_outlined,
+
+              color: isSelected
+                  ? const Color(0xFF2D7CFF)
+                  : const Color(0xFF8A96AA),
+
+              size: 35,
             ),
-          ),
-        ],
+
+            const SizedBox(height: 5),
+
+            Text(
+              name,
+
+              style: TextStyle(
+                fontFamily: "monospace",
+                fontSize: 9,
+
+                color: isSelected
+                    ? Colors.white
+                    : const Color(0xFFB0B8C8),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  // PRICE BREAKDOWN
 
   Widget _priceBreakdown(
       double originalPrice,
@@ -475,7 +550,10 @@ class ItemPageScreen extends StatelessWidget {
 
       decoration: BoxDecoration(
         color: const Color(0xFF10141D),
-        borderRadius: BorderRadius.circular(16),
+
+        borderRadius:
+        BorderRadius.circular(16),
+
         border: Border.all(
           color: const Color(0xFF202735),
         ),
@@ -489,6 +567,7 @@ class ItemPageScreen extends StatelessWidget {
 
           const Text(
             "PRICE BREAKDOWN",
+
             style: TextStyle(
               fontFamily: "monospace",
               fontSize: 13,
@@ -528,6 +607,7 @@ class ItemPageScreen extends StatelessWidget {
 
           const Text(
             "(Figures per Unit)",
+
             style: TextStyle(
               fontFamily: "monospace",
               fontSize: 9,
@@ -538,6 +618,8 @@ class ItemPageScreen extends StatelessWidget {
       ),
     );
   }
+
+  // PRICE ROW
 
   Widget _priceRow(
       String title,
@@ -561,6 +643,7 @@ class ItemPageScreen extends StatelessWidget {
             style: TextStyle(
               fontFamily: "monospace",
               fontSize: 11,
+
               fontWeight: isTotal
                   ? FontWeight.bold
                   : FontWeight.normal,
@@ -589,8 +672,12 @@ class ItemPageScreen extends StatelessWidget {
     );
   }
 
-  //Widget _buyButtons()
-  Widget _buyButtons(BuildContext context, double totalPrice) {
+  // BUY NOW AND ADD TO CART BUTTONS
+
+  Widget _buyButtons(
+      BuildContext context,
+      double totalPrice,
+      ) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
@@ -599,16 +686,18 @@ class ItemPageScreen extends StatelessWidget {
       child: Row(
         children: [
 
-          // BUY NOW button
+          // BUY NOW BUTTON
+
           Expanded(
             child: OutlinedButton(
               onPressed: () {
                 Navigator.push(
                   context,
+
                   MaterialPageRoute(
                     builder: (context) {
                       return BuyNowScreen(
-                        productName: productName,
+                        productName: widget.productName,
                         pricePerItem: totalPrice,
                       );
                     },
@@ -617,7 +706,8 @@ class ItemPageScreen extends StatelessWidget {
               },
 
               style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFF2D7CFF),
+                foregroundColor:
+                const Color(0xFF2D7CFF),
 
                 side: const BorderSide(
                   color: Color(0xFF2D7CFF),
@@ -628,12 +718,14 @@ class ItemPageScreen extends StatelessWidget {
                 ),
 
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius:
+                  BorderRadius.circular(12),
                 ),
               ),
 
               child: const Text(
                 "BUY NOW",
+
                 style: TextStyle(
                   fontFamily: "monospace",
                   fontSize: 11,
@@ -645,13 +737,28 @@ class ItemPageScreen extends StatelessWidget {
 
           const SizedBox(width: 12),
 
-          // ADD TO CART button
+          // ADD TO CART BUTTON
+
           Expanded(
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return AddToCartScreen(
+                        productName: widget.productName,
+                        pricePerItem: totalPrice,
+                      );
+                    },
+                  ),
+                );
+              },
 
               style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFF2D7CFF),
+                foregroundColor:
+                const Color(0xFF2D7CFF),
 
                 side: const BorderSide(
                   color: Color(0xFF2D7CFF),
@@ -662,12 +769,14 @@ class ItemPageScreen extends StatelessWidget {
                 ),
 
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius:
+                  BorderRadius.circular(12),
                 ),
               ),
 
               child: const Text(
                 "ADD TO CART",
+
                 style: TextStyle(
                   fontFamily: "monospace",
                   fontSize: 11,
