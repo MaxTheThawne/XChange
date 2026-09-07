@@ -1,62 +1,40 @@
 import 'package:flutter/material.dart';
-import 'sell.item.dart';
 import 'item_page_screen.dart';
-import 'search_result_assumed_keyword.dart';
-import 'favorites_screen.dart';
-import 'cart_screen.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
 
-  // Temporary products
-  final List<Map<String, dynamic>> products = const [
+  // Temporary cart products
+  final List<Map<String, dynamic>> cartProducts = const [
     {
       "name": "Final Fantasy X PS2",
       "price": 19.50,
+      "image": "assets/images/final_fantasy.jpg",
     },
     {
       "name": "Nintendo GameCube Controller",
       "price": 34.00,
+      "image": "assets/images/gamecube.jpg",
     },
     {
       "name": "Sony PlayStation 2",
       "price": 75.00,
+      "image": "assets/images/ps2.jpg",
     },
     {
       "name": "Nintendo DS Lite",
       "price": 45.00,
+      "image": "assets/images/ds_lite.jpg",
     },
     {
       "name": "Xbox 360 Controller",
       "price": 25.00,
+      "image": "assets/images/xbox_controller.jpg",
     },
     {
       "name": "Game Boy Advance",
       "price": 55.00,
-    },
-    {
-      "name": "PlayStation 1",
-      "price": 60.00,
-    },
-    {
-      "name": "Nintendo Wii",
-      "price": 80.00,
-    },
-    {
-      "name": "PSP Console",
-      "price": 70.00,
-    },
-    {
-      "name": "Sega Genesis",
-      "price": 65.00,
-    },
-    {
-      "name": "Nintendo Switch Controller",
-      "price": 30.00,
-    },
-    {
-      "name": "Retro Game Collection",
-      "price": 40.00,
+      "image": "assets/images/gameboy.jpg",
     },
   ];
 
@@ -70,115 +48,29 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: const Color(0xFF080A0F),
         elevation: 0,
 
-        leading: PopupMenuButton<String>(
+        leading: IconButton(
           icon: const Icon(
-            Icons.more_vert,
+            Icons.arrow_back_ios_new,
             color: Color(0xFF2D7CFF),
+            size: 20,
           ),
 
-          itemBuilder: (context) => const [
-            PopupMenuItem(
-              value: "option1",
-              child: Text("Sell Items"),
-            ),
-
-            PopupMenuItem(
-              value: "My Favorites",
-              child: Text("My Favorites"),
-            ),
-
-            PopupMenuItem(
-              value: "My Cart",
-              child: Text("My Cart"),
-            ),
-          ],
-
-          onSelected: (value) {
-            if (value == "My Favorites") {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const FavoritesScreen(),
-                ),
-              );
-            }
-
-            if (value == "My Cart") {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CartScreen(),
-                ),
-              );
-            }
+          onPressed: () {
+            Navigator.pop(context);
           },
         ),
 
-        title: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const SearchScreen(),
-              ),
-            );
-          },
-
-          child: Container(
-            height: 42,
-
-            decoration: BoxDecoration(
-              color: const Color(0xFF10141D),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: const Color(0xFF2D7CFF),
-              ),
-            ),
-
-            child: const Center(
-              child: Text(
-                "Search Products",
-                style: TextStyle(
-                  fontFamily: "monospace",
-                  fontSize: 12,
-                  color: Color(0xFFB0B8C8),
-                ),
-              ),
-            ),
+        title: const Text(
+          "XC Market",
+          style: TextStyle(
+            fontFamily: "monospace",
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
-
-        actions: [
-          IconButton(
-            onPressed: () {
-              // Account screen will be implemented later.
-            },
-
-            icon: Container(
-              width: 45,
-              height: 45,
-
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color(0xFF10141D),
-                border: Border.all(
-                  color: const Color(0xFF2D7CFF),
-                ),
-              ),
-
-              child: const Icon(
-                Icons.person_outline,
-                color: Color(0xFF2D7CFF),
-                size: 22,
-              ),
-            ),
-          ),
-
-          const SizedBox(width: 8),
-        ],
       ),
 
-      // Product area
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
 
@@ -187,7 +79,7 @@ class HomeScreen extends StatelessWidget {
 
           children: [
             const Text(
-              "Welcome to XChange!",
+              "My Cart",
               style: TextStyle(
                 fontFamily: "monospace",
                 fontSize: 22,
@@ -198,12 +90,12 @@ class HomeScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Product grid
+            // Cart product grid
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
 
-              itemCount: products.length,
+              itemCount: cartProducts.length,
 
               gridDelegate:
               const SliverGridDelegateWithFixedCrossAxisCount(
@@ -212,46 +104,63 @@ class HomeScreen extends StatelessWidget {
                 crossAxisSpacing: 14,
                 mainAxisSpacing: 14,
 
-                childAspectRatio: 0.78,
+                childAspectRatio: 0.70,
               ),
 
               itemBuilder: (context, index) {
-                final product = products[index];
+                final product = cartProducts[index];
 
                 return _buildProductCard(
                   context,
                   product["name"],
                   product["price"],
+                  product["image"],
                 );
               },
             ),
+
+            const SizedBox(height: 20),
+
+            // Checkout button
+            SizedBox(
+              width: double.infinity,
+
+              child: OutlinedButton(
+                onPressed: () {
+                  // Checkout screen will be implemented later.
+                },
+
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: const Color(0xFF2D7CFF),
+
+                  side: const BorderSide(
+                    color: Color(0xFF2D7CFF),
+                  ),
+
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15,
+                  ),
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+
+                child: const Text(
+                  "CHECKOUT",
+                  style: TextStyle(
+                    fontFamily: "monospace",
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
           ],
         ),
       ),
-
-      // Bottom Left Sell Button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SellFlowWizard(),
-            ),
-          );
-        },
-
-        backgroundColor: Colors.grey,
-        elevation: 4,
-
-        child: const Icon(
-          Icons.add,
-          color: Colors.black,
-          size: 28,
-        ),
-      ),
-
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.startFloat,
     );
   }
 
@@ -259,6 +168,7 @@ class HomeScreen extends StatelessWidget {
       BuildContext context,
       String productName,
       double price,
+      String imagePath,
       ) {
     return GestureDetector(
       onTap: () {
@@ -318,17 +228,25 @@ class HomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
 
-                child: const Center(
-                  child: Icon(
-                    Icons.image_outlined,
-                    color: Color(0xFF2D7CFF),
-                    size: 55,
-                  ),
+                child: Image.asset(
+                  imagePath,
+
+                  fit: BoxFit.contain,
+
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Center(
+                      child: Icon(
+                        Icons.image_outlined,
+                        color: Color(0xFF2D7CFF),
+                        size: 55,
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
 
             // Product name
             Text(
@@ -347,7 +265,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 6),
+            const SizedBox(height: 5),
 
             // Product price
             Text(
@@ -358,6 +276,25 @@ class HomeScreen extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF2D7CFF),
+              ),
+            ),
+
+            const SizedBox(height: 4),
+
+            // Remove button
+            TextButton(
+              onPressed: () {
+                // Remove functionality will be implemented later.
+              },
+
+              child: const Text(
+                "REMOVE",
+                style: TextStyle(
+                  fontFamily: "monospace",
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF2D7CFF),
+                ),
               ),
             ),
           ],

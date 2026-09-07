@@ -346,7 +346,7 @@ class _StepPhotos extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Add up to 6 photos. The first photo will be the cover.',
+          const Text('Add up to 4 photos. The first photo will be the cover.',
               style: TextStyle(color: Colors.grey)),
           const SizedBox(height: 20),
           GestureDetector(
