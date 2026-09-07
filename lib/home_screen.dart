@@ -4,6 +4,8 @@ import 'item_page_screen.dart';
 import 'search_result_assumed_keyword.dart';
 import 'favorites_screen.dart';
 import 'cart_screen.dart';
+import 'login_screen.dart';
+import 'create_account_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -151,7 +153,72 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // Account screen will be implemented later.
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    backgroundColor: const Color(0xFF10141D),
+
+                    title: const Text(
+                      "Account Required",
+                      style: TextStyle(
+                        fontFamily: "monospace",
+                        color: Colors.white,
+                      ),
+                    ),
+
+                    content: const Text(
+                      "Please log in or create an account to view My Account.",
+                      style: TextStyle(
+                        fontFamily: "monospace",
+                        color: Color(0xFFB0B8C8),
+                      ),
+                    ),
+
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          "Log In",
+                          style: TextStyle(
+                            fontFamily: "monospace",
+                            color: Color(0xFF2D7CFF),
+                          ),
+                        ),
+                      ),
+
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CreateAccountScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          "Create Account",
+                          style: TextStyle(
+                            fontFamily: "monospace",
+                            color: Color(0xFF2D7CFF),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
 
             icon: Container(
