@@ -347,7 +347,7 @@ class _SearchScreenState extends State<SearchScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               itemCount: filtered.length + (query.isNotEmpty && !_exactMatchExists ? 1 : 0),
               itemBuilder: (context, index) {
-                // Show "Add new word" banner as the first item if query doesn't match existing product
+
                 if (query.isNotEmpty && !_exactMatchExists && index == 0) {
                   return GestureDetector(
                     onTap: () => _addNewWordProduct(query),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'splash_screen.dart';
-import 'home_screen.dart';
+import 'welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      home: const SplashScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }
