@@ -637,10 +637,6 @@ class _StepReview extends StatelessWidget {
     );
   }
 }
-
-// -----------------------------------------------------------------------------
-// LOG-IN MODAL (Triggered before publishing if user is unauthenticated)
-// -----------------------------------------------------------------------------
 class LoginModal extends StatelessWidget {
   final VoidCallback onLoginSuccess;
   const LoginModal({super.key, required this.onLoginSuccess});

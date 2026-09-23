@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "797261616667",
+    "project_id": "xchange-maxthethawne",
+    "storage_bucket": "xchange-maxthethawne.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797261616667:android:fb068527538748ac638abe",
+        "android_client_info": {
+          "package_name": "com.example.xchange"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAszy6k_Eu1i2L1YaiCxabaWOaaTI01L4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
