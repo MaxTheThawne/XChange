@@ -10,10 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF0D0F12),
+        scaffoldBackgroundColor: const Color(0xFF000000),
         fontFamily: 'monospace',
       ),
       home: const SplashScreen(),
@@ -32,9 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-        Navigator.pushReplacement(
+        Navigator.pushReplacement( //push instead if pushReplacement dile previous navigated kora screen active thakbe like splash scnree
           context,
           MaterialPageRoute(builder: (context) => const SearchScreen()),
         );
@@ -44,23 +44,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF0D0F12),
-      body: Center(
+    return Scaffold(
+      backgroundColor: const Color(0xFF000000),
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.search, size: 80, color: Colors.blue),
-            SizedBox(height: 16),
-            Text(
-              'XChange Search',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2,
-              ),
-            ),
-          ],
         ),
       ),
     );
@@ -69,7 +57,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
 class Product {
   final String title;
-  final String rating;
   final String condition;
   final String price;
   final String? originalPrice;
@@ -78,7 +65,6 @@ class Product {
 
   Product({
     required this.title,
-    required this.rating,
     required this.condition,
     required this.price,
     this.originalPrice,
@@ -96,71 +82,64 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  String _selectedCategory = 'All';
+  String _selectedCategory = 'New';
 
   // Sample initial product list
   final List<Product> _products = [
     Product(
       title: 'Okami HD - Nintendo Switch Edition',
-      rating: '★★★★★ (412)',
       condition: 'New',
       price: '\$29.99',
       originalPrice: '\$39.99',
       shipping: 'Free shipping',
-      imageUrl: 'https://picsum.photos/200?random=1',
+      imageUrl: 'https://picsum.phoasdastos/200?random=1',
     ),
     Product(
       title: 'MacBook Pro 14" M3 Pro - Space Black',
-      rating: '★★★★☆ (312)',
       condition: 'New',
       price: '\$1,799.00',
       originalPrice: '\$2,199',
       shipping: 'Free shipping',
-      imageUrl: 'https://picsum.photos/200?random=2',
+      imageUrl: 'https://picsum.photosasdadas/200?random=2',
     ),
     Product(
       title: 'Dell XPS 15 - Intel Core i9, 32GB RAM',
-      rating: '★★★★☆ (187)',
       condition: 'Refurbished',
       price: '\$1,349.99',
       shipping: 'Free shipping',
-      imageUrl: 'https://picsum.photos/200?random=3',
+      imageUrl: 'https://picsum.photos/adadasd200?random=3',
     ),
     Product(
       title: 'ASUS ROG Zephyrus G14 - Ryzen 9',
-      rating: '★★★★☆ (94)',
       condition: 'New',
       price: '\$1,099.00',
       originalPrice: '\$1,399',
       shipping: '\$9.99 shipping',
-      imageUrl: 'https://picsum.photos/200?random=4',
+      imageUrl: 'https://picsum.phoqwdqdqwdos/200?random=4',
     ),
     Product(
       title: 'Lenovo ThinkPad X1 Carbon Gen 11',
-      rating: '★★★★☆ (223)',
       condition: 'Open box',
       price: '\$899.00',
       originalPrice: '\$1,149',
       shipping: 'Free shipping',
-      imageUrl: 'https://picsum.photos/200?random=5',
+      imageUrl: 'https://picsum.photqweqeqweos/200?random=5',
     ),
     Product(
       title: 'Devil May Cry 2',
-      rating: '★★☆☆☆ (223)',
       condition: 'Open box',
       price: '\$2.00',
       originalPrice: '\$20',
       shipping: 'Free shipping',
-      imageUrl: 'https://u-mercari-images.mercdn.net/thumb/photos/m85967365978_1.jpg?width=2560&quality=75&_=1769927890',
+      imageUrl: 'https://u-mercari-images.merc>>>>dn.net/thumb/photos/m85967365978_1.jpg?width=2560&quality=75&_=1769927890',
     ),
     Product(
       title: 'Grade 10 Japanese First Print Pikachu Card',
-      rating: '★★★★★ (22323)',
       condition: 'Open box',
       price: '\$4000000',
       originalPrice: '\$200000',
       shipping: 'Free shipping',
-      imageUrl: 'https://pbs.twimg.com/media/G88v-DSXQAAud4t.jpg',
+      imageUrl: 'https://pbs.twimg.com/media/Gdasdada88v-DSXQAAud4t.jpg',
     ),
   ];
 
@@ -204,7 +183,6 @@ class _SearchScreenState extends State<SearchScreen> {
         0,
         Product(
           title: newWord,
-          rating: '★ New Item',
           condition: 'New',
           price: '\$499.00',
           shipping: 'Free shipping',
@@ -220,23 +198,23 @@ class _SearchScreenState extends State<SearchScreen> {
     final query = _searchController.text.trim();
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0D0F12),
+      backgroundColor: const Color(0xFF000000),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF121418),
+        backgroundColor: const Color(0xFF000000),
         elevation: 0,
 
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.grey),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Container(
-          height: 42,
+          height: 37,
           decoration: BoxDecoration(
             color: const Color(0xFF1A1D24),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: const Color(0xFF2A2F3A)),
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(color: const Color(0xFF1D2AA6)),
           ),
           child: Row(
             children: [
@@ -248,22 +226,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                    hintText: 'Search product...',
+                    hintText: 'Search your product here!',
                     hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
-              ),
-              Container(
-                width: 42,
-                height: 42,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF2563EB),
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(7),
-                    bottomRight: Radius.circular(7),
-                  ),
-                ),
-                child: const Icon(Icons.search, color: Colors.white, size: 20),
               ),
             ],
           ),
@@ -292,12 +258,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: Row(
                     children: [
                       Container(width: 8, height: 8, color: Colors.blue),
-                      const SizedBox(width: 6),
-                      Text(
-                        'Best match',
-                        style: const TextStyle(
-                            fontFamily: 'monospace', color: Colors.blue, fontSize: 11),
-                      ),
                     ],
                   ),
                 ),
@@ -306,39 +266,6 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
 
           // Horizontal Filter Chips
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: Row(
-              children: ['All', 'New', 'Refurbished', 'Open box'].map((category) {
-                final isSelected = _selectedCategory == category;
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ChoiceChip(
-                    label: Text(
-                      category,
-                      style: TextStyle(
-                        fontFamily: 'monospace',
-                        color: isSelected ? Colors.white : Colors.grey[400],
-                        fontSize: 12,
-                      ),
-                    ),
-                    selected: isSelected,
-                    selectedColor: const Color(0xFF2563EB),
-                    backgroundColor: const Color(0xFF1A1D24),
-                    side: BorderSide(
-                      color: isSelected ? const Color(0xFF2563EB) : const Color(0xFF2A2F3A),
-                    ),
-                    onSelected: (bool selected) {
-                      setState(() {
-                        _selectedCategory = category;
-                      });
-                    },
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
           const SizedBox(height: 8),
 
           // Scrollable List View
@@ -390,49 +317,27 @@ class _ProductCard extends StatelessWidget {
 
   const _ProductCard({required this.product});
 
-  Color _getBadgeColor(String condition) {
-    switch (condition) {
-      case 'Refurbished':
-        return Colors.blue.shade900;
-      case 'Open box':
-        return Colors.amber.shade900;
-      default:
-        return Colors.green.shade900;
-    }
-  }
-
-  Color _getBadgeTextColor(String condition) {
-    switch (condition) {
-      case 'Refurbished':
-        return Colors.blue.shade200;
-      case 'Open box':
-        return Colors.amber.shade200;
-      default:
-        return Colors.green.shade200;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
-        color: const Color(0xFF1A1D24),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF222731)),
+        color: const Color(0xFF0C0F39),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: const Color(0xFFF8F8F8)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(15),
             child: Image.network(
               product.imageUrl,
-              width: 80,
+              width: 150,
               height: 80,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Container(width: 80, height: 80, color: Colors.black26),
+              errorBuilder: (context, error, stackTrace) => Container(width: 150, height: 150, color: Colors.white),
             ),
           ),
           const SizedBox(width: 12),
@@ -446,32 +351,13 @@ class _ProductCard extends StatelessWidget {
                     fontFamily: 'monospace',
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 13,
+                    fontSize: 14,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 2),
-                Text(
-                  product.rating,
-                  style: const TextStyle(
-                      fontFamily: 'monospace', color: Colors.amber, fontSize: 11),
-                ),
                 const SizedBox(height: 4),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: _getBadgeColor(product.condition),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    product.condition,
-                    style: TextStyle(
-                      fontFamily: 'monospace',
-                      color: _getBadgeTextColor(product.condition),
-                      fontSize: 10,
-                    ),
-                  ),
                 ),
                 const SizedBox(height: 4),
                 Row(
@@ -491,8 +377,8 @@ class _ProductCard extends StatelessWidget {
                         product.originalPrice!,
                         style: const TextStyle(
                           fontFamily: 'monospace',
-                          color: Colors.grey,
-                          fontSize: 11,
+                          color: Colors.limeAccent,
+                          fontSize: 12,
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
@@ -507,7 +393,6 @@ class _ProductCard extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(Icons.bookmark_border, color: Colors.grey, size: 20),
         ],
       ),
     );
