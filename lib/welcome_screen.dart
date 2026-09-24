@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-    const WelcomeScreen();
+    const WelcomeScreen({super.key});
 
 
     @override
@@ -192,7 +192,7 @@ class WelcomeScreen extends StatelessWidget {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => const HomeScreen(),
+                                            builder: (context) =>  HomeScreen(),
                                         ),
                                     );
                                 },

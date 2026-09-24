@@ -212,9 +212,9 @@ class _SearchScreenState extends State<SearchScreen> {
         title: Container(
           height: 37,
           decoration: BoxDecoration(
-            color: const Color(0xFF1A1D24),
+            color: const Color(0xD7736767),
             borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: const Color(0xFF1D2AA6)),
+            border: Border.all(color: const Color(0xFF0F1660)),
           ),
           child: Row(
             children: [
@@ -237,35 +237,6 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Column(
         children: [
-          // Subheader Meta & Best Match
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${filtered.length} results for "$query"',
-                  style: const TextStyle(
-                      fontFamily: 'monospace', color: Colors.grey, fontSize: 12),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1A1D24),
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: const Color(0xFF2A2F3A)),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(width: 8, height: 8, color: Colors.blue),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Horizontal Filter Chips
           const SizedBox(height: 8),
 
           // Scrollable List View
@@ -298,10 +269,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   );
                 }
-
                 final productIndex = (query.isNotEmpty && !_exactMatchExists) ? index - 1 : index;
                 final product = filtered[productIndex];
-
                 return _ProductCard(product: product);
               },
             ),
@@ -320,18 +289,18 @@ class _ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(2),
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.all(1),
       decoration: BoxDecoration(
         color: const Color(0xFF0C0F39),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(0),
         border: Border.all(color: const Color(0xFFF8F8F8)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(0),
             child: Image.network(
               product.imageUrl,
               width: 150,
