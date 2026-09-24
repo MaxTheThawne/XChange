@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
+import 'welcome_screen.dart';
 
 void main()
 {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen()
+      home: WelcomeScreen()
     );
 
   }
