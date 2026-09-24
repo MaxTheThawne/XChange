@@ -1,26 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: true,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF000000),
-        fontFamily: 'monospace',
-      ),
-      home: const SplashScreen(),
-    );
-  }
-}
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -213,57 +192,19 @@ class _SearchScreenState extends State<SearchScreen> {
           height: 37,
           decoration: BoxDecoration(
             color: const Color(0xFF1A1D24),
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(0),
             border: Border.all(color: const Color(0xFF1D2AA6)),
           ),
           child: Row(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _searchController,
-                  style: const TextStyle(
-                      fontFamily: 'monospace', color: Colors.white, fontSize: 14),
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                    hintText: 'Search your product here!',
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),
       ),
       body: Column(
         children: [
-          // Subheader Meta & Best Match
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${filtered.length} results for "$query"',
-                  style: const TextStyle(
-                      fontFamily: 'monospace', color: Colors.grey, fontSize: 12),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1A1D24),
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: const Color(0xFF2A2F3A)),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(width: 8, height: 8, color: Colors.blue),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+
 
           // Horizontal Filter Chips
           const SizedBox(height: 8),
@@ -283,7 +224,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: const Color(0xFF1E293B),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(0),
                         border: Border.all(color: const Color(0xFF3B82F6), style: BorderStyle.solid),
                       ),
                       child: Center(
@@ -324,14 +265,14 @@ class _ProductCard extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
         color: const Color(0xFF0C0F39),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(0),
         border: Border.all(color: const Color(0xFFF8F8F8)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(0),
             child: Image.network(
               product.imageUrl,
               width: 150,
