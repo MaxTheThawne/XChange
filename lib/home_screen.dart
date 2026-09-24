@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'item_card.dart';
 import 'details_screen.dart';
+import'search_result_assumed_keyword.dart';
 
 class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 50, 40, 120),
       appBar: AppBar(
+        actions: [
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchScreen()),
+              );
+            },
+            icon: const Icon(Icons.search),
+            label: const Text('Search'),
+          ),
+        ],
         elevation: 10,
         backgroundColor: Colors.blue,
         shadowColor: Colors.black,
